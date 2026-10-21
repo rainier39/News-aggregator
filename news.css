@@ -1,0 +1,26 @@
+html {
+ font-family: "Times New Roman", "Times", serif; 
+ font-size: 20px;
+}
+body {
+ max-width: 1000px;
+ margin: auto;
+}
+.tiles {
+ display: grid;
+ gap: 6px;
+}
+.tile {
+ box-shadow: 0px 0px 4px #00000088;
+ padding: 8px 16px;
+}
+footer {
+ margin-top: 6px;
+ margin-bottom: 6px;
+}
+@media only screen and (max-width: 1000px) {
+ body {
+  margin-left: 6px;
+  margin-right: 6px;
+ }
+}
