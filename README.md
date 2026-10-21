@@ -7,3 +7,6 @@ The software is reasonably secure (no XSS), but very basic, not the most robust,
 - Some webserver (e.g. Apache2, Nginx)
 - PHP 7.4+
 - php-xml (may or may not be prepackaged with PHP)
+
+## Gallery
+[See here](https://github.com/rainier39/News-aggregator/wiki#gallery).
