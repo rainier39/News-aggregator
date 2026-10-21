@@ -18,8 +18,6 @@
 
 // Custom news aggregator.
 
-// sudo apt install php-xml
-
 $config = array(
  "timezone" => "America/Los_Angeles"
 );
@@ -39,7 +37,7 @@ echo("<!DOCTYPE html>
  <head>
   <meta charset='UTF-8'>
   <title>News aggregator</title>
-  <link rel='stylesheet' href='news.css'>
+  <link rel='stylesheet' href='./news.css'>
   <meta name='viewport' content='width=device-width,initial-scale=1.0'>
  </head>
  <body>
@@ -49,14 +47,15 @@ echo("<!DOCTYPE html>
 foreach ($feeds as $feed) {
     $raw = file_get_contents($feed);
     $xml = simplexml_load_string($raw);
-    $author = $xml->channel->title;
-    foreach ($xml->channel->item as $item) {
+    $author = $xml->channel->title ?? $xml->title;
+    $items = $xml->channel->item ?? $xml->entry;
+    foreach ($items as $item) {
         $tile = array();
         $tile["author"] = $author;
         $tile["link"] = $item->link;
         $tile["title"] = $item->title;
-        $tile["pubDate"] = strtotime($item->pubDate);
-        $tile["description"] = $item->description;
+        $tile["pubDate"] = strtotime($item->pubDate ?? $item->updated);
+        $tile["description"] = $item->description ?? $item->summary ?? $item->content;
         $tiles[] = $tile;
     }
 }
@@ -78,7 +77,10 @@ foreach ($tiles as $tile) {
     echo(htmlspecialchars(date("F j, Y g:i a", $tile["pubDate"])));
     echo("</i>");
     echo("<br>");
-    echo(htmlspecialchars($tile["description"]));
+    echo("<div class='content'>");
+    // Cap the preview to 2048.
+    echo(htmlspecialchars(substr($tile["description"], 0, 2048)));
+    echo("</div>");
     echo("</div>");
 }
 
