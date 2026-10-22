@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright © 2025 rainier39 <rainier39@proton.me>
+ * Copyright © 2026 rainier39 <rainier39@proton.me>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
